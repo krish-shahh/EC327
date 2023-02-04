@@ -32,12 +32,18 @@ double angle(Point a, Point b, Point c) {
 
 int main() {
     Point a, b, c;
-    std::cout << "Enter the x and y coordinates of the first point: ";
-    std::cin >> a.x >> a.y;
-    std::cout << "Enter the x and y coordinates of the second point: ";
-    std::cin >> b.x >> b.y;
-    std::cout << "Enter the x and y coordinates of the third point: ";
-    std::cin >> c.x >> c.y;
+    std::cout << "Enter the x coordinate of the first point: ";
+    std::cin >> a.x;
+    std::cout << "Enter the y coordinate of the first point: ";
+    std::cin >> a.y;
+    std::cout << "Enter the x coordinate of the second point: ";
+    std::cin >> b.x;
+    std::cout << "Enter the y coordinate of the second point: ";
+    std::cin >> b.y;
+    std::cout << "Enter the x coordinate of the third point: ";
+    std::cin >> c.x;
+    std::cout << "Enter the y coordinate of the third point: ";
+    std::cin >> c.y;
 
     double AB = distance(a, b);
     double BC = distance(b, c);
@@ -47,8 +53,10 @@ int main() {
     double C = angle(a, c, b);
     double perimeter = AB + BC + AC;
     double s = perimeter / 2;
-    double area = sqrt(s * (s - AB) * (s - BC) * (s - AC));
+    double area = sqrt(s * (s - AB) * (s - BC) * (s - AC)); // Heron's Formula
 
+
+    // ToDo: Format Output into Table
     std::cout << std::fixed << std::setprecision(2);
     std::cout << "Side lengths:" << std::endl;
     std::cout << "AB = " << AB << std::endl;
