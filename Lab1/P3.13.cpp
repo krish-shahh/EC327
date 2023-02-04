@@ -15,9 +15,9 @@ std::string roman_numeral(int num) {
 }
 
 int main() {
-  int year;
+  int value;
   std::cout << "Enter a number: ";
-  std::cin >> year;
-  std::cout << "The corresponding Roman numeral is: " << roman_numeral(year) << std::endl;
+  std::cin >> value;
+  std::cout << "The corresponding Roman numeral is: " << roman_numeral(value) << std::endl;
   return 0;
 }

@@ -1,5 +1,6 @@
 /*
-    Write a program that reads two times in military format (0900, 1730) and prints the number of hours and minutes between the two times. For extra credit, implement a case where the first time is later than the second time.
+    Write a program that reads two times in military format (0900, 1730) and prints the number of hours and minutes between the two times. 
+    For extra credit, implement a case where the first time is later than the second time.
 */
 
 #include <iostream>
