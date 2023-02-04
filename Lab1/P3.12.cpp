@@ -2,7 +2,6 @@
 Write a program that reads in the x- and y-coordinates of four corner points of a quadrilateral and prints out whether it is a square, a rectangle, a trapezoid, a rhom- bus, or none of those shapes.
 */
 
-
 #include <iostream>
 #include <cmath>
 
