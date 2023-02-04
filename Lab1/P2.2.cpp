@@ -12,8 +12,6 @@ Supply a program that prompts a user for the corner point coordinates and produc
 #include <cmath>
 #include <iomanip>
 
-const double pi = 3.14159265358979323846;
-
 struct Point {
     double x;
     double y;
@@ -27,7 +25,7 @@ double angle(Point a, Point b, Point c) {
     double A = distance(b, c);
     double B = distance(a, c);
     double C = distance(a, b);
-    return acos((A * A + C * C - B * B) / (2 * A * C)) * 180 / pi;
+    return acos((A * A + C * C - B * B) / (2 * A * C)) * 180 / M_PI; //pi constant resource: http://www.quantstart.com/articles/Mathematical-Constants-in-C/
 }
 
 int main() {
@@ -56,8 +54,10 @@ int main() {
     double area = sqrt(s * (s - AB) * (s - BC) * (s - AC)); // Heron's Formula
 
     // Formatting Output into Table
-    std::cout << std::fixed << std::setprecision(2);
-    std::cout << std::left << std::setw(20) << "Side Lengths:" << std::endl;
+    // setw resource: https://cplusplus.com/reference/iomanip/setw/
+    // setpercision resource: https://cplusplus.com/reference/iomanip/setprecision/
+    std::cout << std::fixed << std::setprecision(3); 
+    std::cout << std::left << std::setw(20) << "Side Lengths:" << std::endl; 
     std::cout << std::left << std::setw(15) << "AB" << "= " << AB << std::endl;
     std::cout << std::left << std::setw(15) << "BC" << "= " << BC << std::endl;
     std::cout << std::left << std::setw(15) << "AC" << "= " << AC << std::endl;
