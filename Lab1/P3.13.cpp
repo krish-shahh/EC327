@@ -18,6 +18,13 @@ int main() {
   int value;
   std::cout << "Enter a number: ";
   std::cin >> value;
+  if(value < 0 || value > 3999) {
+    std::cout << "Invalid input. Number must be between 1 and 3999." << std::endl;
+    return 0;
+  }
   std::cout << "The corresponding Roman numeral is: " << roman_numeral(value) << std::endl;
   return 0;
 }
+
+
+
