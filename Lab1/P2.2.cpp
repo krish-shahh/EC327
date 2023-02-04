@@ -55,19 +55,18 @@ int main() {
     double s = perimeter / 2;
     double area = sqrt(s * (s - AB) * (s - BC) * (s - AC)); // Heron's Formula
 
-
-    // ToDo: Format Output into Table
+    // Formatting Output into Table
     std::cout << std::fixed << std::setprecision(2);
-    std::cout << "Side lengths:" << std::endl;
-    std::cout << "AB = " << AB << std::endl;
-    std::cout << "BC = " << BC << std::endl;
-    std::cout << "AC = " << AC << std::endl;
-    std::cout << "Angles:" << std::endl;
-    std::cout << "A = " << A << " degrees" << std::endl;
-    std::cout << "B = " << B << " degrees" << std::endl;
-    std::cout << "C = " << C << " degrees" << std::endl;
-    std::cout << "Perimeter: " << perimeter << std::endl;
-    std::cout << "Area: " << area << std::endl;
+    std::cout << std::left << std::setw(20) << "Side Lengths:" << std::endl;
+    std::cout << std::left << std::setw(15) << "AB" << "= " << AB << std::endl;
+    std::cout << std::left << std::setw(15) << "BC" << "= " << BC << std::endl;
+    std::cout << std::left << std::setw(15) << "AC" << "= " << AC << std::endl;
+    std::cout << std::left << std::setw(20) << "Angles:" << std::endl;
+    std::cout << std::left << std::setw(15) << "A" << "= " << A << " degrees" << std::endl;
+    std::cout << std::left << std::setw(15) << "B" << "= " << B << " degrees" << std::endl;
+    std::cout << std::left << std::setw(15) << "C" << "= " << C << " degrees" << std::endl;    
+    std::cout << std::left << std::setw(15) << "Perimeter:" << "= " << perimeter << std::endl;
+    std::cout << std::left << std::setw(15) << "Area:" << "= " << area << std::endl;
 
     return 0;
 }

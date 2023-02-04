@@ -3,45 +3,45 @@ Write a program to randomly flips a fair coin until it sees a Heads followed imm
 */
 
 #include <iostream>
-#include <random>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+int flipCoin() {
+  return rand() % 2;
+}
 
 int main() {
-  int event1Heads = 0;
-  int event1Tails = 0;
-  int event2Heads = 0;
-  int event2Tails = 0;
-  int numRuns = 1;
+  srand(time(0));
 
-  std::random_device rd;
-  std::mt19937 generator(rd());
-  std::uniform_int_distribution<int> coinFlip(0, 1);
+  int event1Heads = 0, event1Tails = 0, event2Heads = 0, event2Tails = 0;
 
-  for (int i = 0; i < numRuns; i++) {
-    int prev = coinFlip(generator);
-    int curr = coinFlip(generator);
-    while (prev != 1 || curr != 0) {
+  for (int i = 0; i < 2622; i++) {
+    int prev = flipCoin();
+    int current = flipCoin();
+
+    if (prev == 0 && current == 1) {
+      event1Heads++;
+      event1Tails++;
+    } else {
       event1Heads += prev;
-      event1Tails += curr;
-      prev = curr;
-      curr = coinFlip(generator);
-    }
-    event1Heads += prev;
-    event1Tails += curr;
+      event1Tails += (current == 0 ? 1 : 0);
+      prev = current;
+      current = flipCoin();
 
-    prev = coinFlip(generator);
-    curr = coinFlip(generator);
-    while (prev != 0 || curr != 0) {
-      event2Heads += prev;
-      event2Tails += curr;
-      prev = curr;
-      curr = coinFlip(generator);
+      if (prev == 0 && current == 0) {
+        event2Heads += prev;
+        event2Tails += current + 2;
+      } else {
+        event2Heads += prev;
+        event2Tails += (current == 0 ? 1 : 0);
+      }
     }
-    event2Heads += prev;
-    event2Tails += curr;
   }
 
-  std::cout << "Event 1: " << event1Heads << " heads, " << event1Tails << " tails" << std::endl;
-  std::cout << "Event 2: " << event2Heads << " heads, " << event2Tails << " tails" << std::endl;
+  cout << "Event 1: " << event1Heads << " Heads and " << event1Tails << " Tails" << endl;
+  cout << "Event 2: " << event2Heads << " Heads and " << event2Tails << " Tails" << endl;
 
   return 0;
 }
