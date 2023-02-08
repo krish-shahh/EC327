@@ -4,6 +4,7 @@ Write a program that reads in the x- and y-coordinates of four corner points of 
 
 #include <iostream>
 #include <cmath>
+#include <cstdlib>
 
 int main() {
     double x1, y1, x2, y2, x3, y3, x4, y4;
@@ -32,6 +33,11 @@ int main() {
     double d_diagonal1 = sqrt(pow(x3 - x1, 2) + pow(y3 - y1, 2));
     double d_diagonal2 = sqrt(pow(x2 - x4, 2) + pow(y2 - y4, 2));
 
+    double d1_slope = ((y2 - y1) / (x2 - x1));
+    double d2_slope = ((y3 - y2) / (x3 - x2));
+    double d3_slope = ((y4 - y3) / (x4 - x3));
+    double d4_slope = ((y1 - y4) / (x1 - x4));
+
     if (d1 == d2 && d2 == d3 && d3 == d4 && d1 == d4) {
         if(d_diagonal1 == d_diagonal2) {
             std::cout << "square" << std::endl;
@@ -40,7 +46,7 @@ int main() {
         std::cout << "rectangle" << std::endl;
     } else if (d_diagonal1 != d_diagonal2) {
         std::cout << "rhombus" << std::endl;
-    } else if (d1 == d3 || d2 == d4) {
+    } else if ((d1_slope == d3_slope || d2_slope == d4_slope)) {
         std::cout << "trapezoid" << std::endl;
     } else {
         std::cout << "none of those shapes" << std::endl;

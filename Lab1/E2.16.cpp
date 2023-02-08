@@ -20,16 +20,11 @@ int main() {
 
     int total_minutes_first = first_hours * 60 + first_minutes;
     int total_minutes_second = second_hours * 60 + second_minutes;
-    int difference;
 
-    if (total_minutes_first <= total_minutes_second) {
-        difference = total_minutes_second - total_minutes_first;
-    } else {
-        difference = 1440 - (total_minutes_first - total_minutes_second);
-    }
+    int minutes = (total_minutes_second + 1440 - total_minutes_first) % 1440;
 
-    int hours = std::floor(difference / 60);
-    int minutes = difference % 60;
+    int hours = minutes / 60;
+    minutes = minutes % 60;
 
     std::cout << "The difference between the times is: " << hours << " hours and " << minutes << " minutes" << std::endl;
 
