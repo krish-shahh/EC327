@@ -1,66 +1,59 @@
 #include <iostream>
-#include <vector>
 #include <string>
-#include <sstream>
+#include <vector>
+#include <algorithm>
 
-const int lineLength = 40;
+const int LINE_LENGTH = 40;
 
-// Helper function to justify a line of text
-std::string justifyLine(std::vector<std::string> &words, int start, int end) {
-  std::string line;
-  int numWords = end - start + 1;
-  int totalLength = 0;
-  for (int i = start; i <= end; i++) {
-    totalLength += words[i].length();
-  }
-  int numSpaces = lineLength - totalLength;
-  int spacesBetweenWords = (numWords > 1) ? numSpaces / (numWords - 1) : 0;
-  int extraSpaces = (numWords > 1) ? numSpaces % (numWords - 1) : 0;
-  for (int i = start; i <= end; i++) {
-    line += words[i];
-    if (i < end) {
-      line += std::string(spacesBetweenWords, ' ');
-      if (extraSpaces > 0) {
-        line += ' ';
-        extraSpaces--;
-      }
+// Function to add spaces between words to make the line exactly LINE_LENGTH characters long
+void addSpaces(std::string& line, int lineLength, int spacesToAdd) {
+  int spaceIndex = 0;
+  while (spacesToAdd > 0) {
+    spaceIndex = line.find(" ", spaceIndex);
+    if (spaceIndex == std::string::npos) {
+      spaceIndex = 0;
+    } else {
+      line.insert(spaceIndex, " ");
+      spaceIndex += 2;
+      spacesToAdd--;
     }
   }
-  return line;
 }
 
 int main() {
   std::vector<std::string> words;
   std::string word;
+  
+  // Read words from the user until they enter "end"
+  while (true) {
+    std::cin >> word;
+    if (word == "end") {
+      break;
+    }
+    words.push_back(word);
+  }
+
   std::string line;
-  std::string paragraph;
-  std::string input;
-  
-  std::cout << "Enter a paragraph of words, followed by end-of-file: ";
-  while (std::getline(std::cin, input)) {
-    std::stringstream ss(input);
-    while (ss >> word) {
-      words.push_back(word);
+  for (int i = 0; i < words.size(); i++) {
+    if (line.length() + words[i].length() <= LINE_LENGTH) {
+      line += words[i];
+      if (i != words.size() - 1) {
+        line += " ";
+      } else {
+        std::cout << line << std::endl;
+      }
+    } else {
+      int spacesToAdd = LINE_LENGTH - line.length();
+      addSpaces(line, LINE_LENGTH, spacesToAdd);
+      std::cout << line << std::endl;
+      line = words[i];
+      if (i != words.size() - 1) {
+        line += " ";
+      } else {
+        std::cout << line << std::endl;
+      }
     }
   }
-  
-  int start = 0;
-  int end = 0;
-  int lineLength = 0;
-  while (end < words.size()) {
-    lineLength += words[end].length();
-    if (lineLength > 40) {
-      line = justifyLine(words, start, end - 1);
-      paragraph += line + '\n';
-      start = end;
-      lineLength = words[end].length();
-    }
-    end++;
-  }
-  line = justifyLine(words, start, end - 1);
-  paragraph += line;
-  
-  std::cout << paragraph << std::endl;
-  
+
   return 0;
 }
