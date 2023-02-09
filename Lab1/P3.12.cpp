@@ -44,9 +44,9 @@ int main() {
         }
     } else if (d1 == d3 && d2 == d4 && d_diagonal1 == d_diagonal2) {
         std::cout << "rectangle" << std::endl;
-    } else if (d_diagonal1 != d_diagonal2) {
+    } else if (d1_slope == d3_slope && d2_slope == d4_slope && d_diagonal1 != d_diagonal2) {
         std::cout << "rhombus" << std::endl;
-    } else if ((d2_slope == d4_slope)) {
+    } else if ((y1 == y4 && y2 == y3) || (x1 == x2 && x3 == x4)) {
         std::cout << "trapezoid" << std::endl;
     } else {
         std::cout << "none of those shapes" << std::endl;
