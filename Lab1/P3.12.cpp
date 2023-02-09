@@ -46,7 +46,7 @@ int main() {
         std::cout << "rectangle" << std::endl;
     } else if (d_diagonal1 != d_diagonal2) {
         std::cout << "rhombus" << std::endl;
-    } else if ((d1_slope == d3_slope || d2_slope == d4_slope)) {
+    } else if ((d2_slope == d4_slope)) {
         std::cout << "trapezoid" << std::endl;
     } else {
         std::cout << "none of those shapes" << std::endl;
