@@ -1,8 +1,8 @@
 #include <iostream>
 
-int HammingDistance(unsigned int aa, unsigned int bb) {
-    unsigned int count = 0;
-    unsigned int diff = aa ^ bb;  // XOR operation to find bit differences
+int HammingDistance(unsigned long aa, unsigned long bb) {
+    unsigned long count = 0;
+    unsigned long diff = aa ^ bb;  // XOR operation to find bit differences
     
     while (diff != 0) {
         count++;
