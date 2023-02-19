@@ -1,26 +1,26 @@
 #include <iostream>
+#include <cmath>
+
+using namespace std;
 
 long tau(long nn) {
-    if (nn <= 1) {  // special case: tau(1) = 0
+    if (nn == 1) {
         return 0;
     }
-    for (int ii = 2; ii <= nn / 2; ii++) {
-        if (nn % ii == 0) {
-            // nn is composite, so find its factors and recurse on them
-            long aa = ii;
-            long bb = nn / ii;
-            return tau(aa) + tau(bb);
+    for (int i = 2; i <= sqrt(nn); i++) {
+        if (nn % i == 0) {
+            int factor1 = i;
+            int factor2 = nn / i;
+            return tau(factor1) + tau(factor2);
         }
     }
-    // nn is prime
     return nn;
 }
 
 int main() {
-    std::cout << tau(1) << std::endl;  // should output 0
-    std::cout << tau(2) << std::endl;  // should output 2
-    std::cout << tau(3) << std::endl;  // should output 3
-    std::cout << tau(6) << std::endl;  // should output 5
-    std::cout << tau(12) << std::endl;  // should output 7
+    long n;
+    cout << "Enter a positive integer: ";
+    cin >> n;
+    cout << "tau(" << n << ") = " << tau(n) << endl;
     return 0;
 }

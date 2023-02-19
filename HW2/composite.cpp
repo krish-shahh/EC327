@@ -1,20 +1,32 @@
 #include <iostream>
+#include <cmath>
+
+using namespace std;
 
 bool compositeQ(int nn) {
-    if (nn <= 1) {  // special cases: 0, 1 are not composite
+    if (nn <= 1) {
         return false;
     }
-    for (int ii = 2; ii <= nn / 2; ii++) {
-        if (nn % ii == 0) {
-            return true;  // nn has a factor, so it is composite
+    
+    int limit = sqrt(nn);
+    for (int i = 2; i <= limit; i++) {
+        if (nn % i == 0) {
+            return true;
         }
     }
-    return false;  // nn is prime, so it is not composite
+    
+    return false;
 }
 
 int main() {
-    std::cout << compositeQ(3) << std::endl;  // should output 0 (false)
-    std::cout << compositeQ(4) << std::endl;  // should output 1 (true)
-    std::cout << compositeQ(6) << std::endl;  // should output 1 (true)
+    int nn;
+    cout << "Enter an integer: ";
+    cin >> nn;
+    
+    if (compositeQ(nn)) {
+        cout << nn << " is composite." << endl;
+    } else {
+        cout << nn << " is prime." << endl;
+    }
     return 0;
 }

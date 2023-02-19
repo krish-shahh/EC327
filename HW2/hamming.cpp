@@ -1,19 +1,29 @@
 #include <iostream>
 
+using namespace std;
+
 int HammingDistance(unsigned long aa, unsigned long bb) {
-    unsigned long count = 0;
-    unsigned long diff = aa ^ bb;  // XOR operation to find bit differences
-    
-    while (diff != 0) {
-        count++;
-        diff &= diff - 1;  // clear the least significant bit that is set
+    unsigned long mask = 1;
+    int distance = 0;
+    for (int i = 0; i < sizeof(unsigned long) * 8; i++) {
+        if ((aa & mask) != (bb & mask)) {
+            distance++;
+        }
+        mask <<= 1;
     }
-    
-    return count;
+    return distance;
 }
 
+
 int main() {
-    std::cout << HammingDistance(10, 14) << std::endl;  // should output 1
-    std::cout << HammingDistance(1, 15) << std::endl;  // should output 3
+    unsigned long aa, bb;
+    cout << "Enter the first unsigned long integer: ";
+    cin >> aa;
+    cout << "Enter the second unsigned long integer: ";
+    cin >> bb;
+    int distance = HammingDistance(aa, bb);
+    cout << "The Hamming distance between " << aa << " and " << bb << " is " << distance << std::endl;
+    // cout << HammingDistance(10, 14) << endl;  // should output 1
+    // cout << HammingDistance(1, 15) << endl;  // should output 3
     return 0;
 }
