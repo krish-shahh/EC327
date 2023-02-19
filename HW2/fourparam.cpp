@@ -1,65 +1,60 @@
 #include <iostream>
-#include <vector>
+#include <algorithm>
 
 using namespace std;
 
-bool dfs(vector<int>& nums, int target) {
-    if (nums.size() == 1) {
-        return nums[0] == target;
-    }
-    for (int i = 0; i < nums.size(); i++) {
-        for (int j = 0; j < i; j++) {
-            int a = nums[i], b = nums[j];
-            vector<int> next_nums;
-            for (int k = 0; k < nums.size(); k++) {
-                if (k != i && k != j) {
-                    next_nums.push_back(nums[k]);
-                }
-            }
-            next_nums.push_back(a + b);
-            if (dfs(next_nums, target)) {
-                return true;
-            }
-            next_nums.back() = a * b;
-            if (dfs(next_nums, target)) {
-                return true;
-            }
-            if (b != 0 && a % b == 0) {
-                next_nums.back() = a / b;
-                if (dfs(next_nums, target)) {
-                    return true;
-                }
-            }
-            if (a != 0 && b % a == 0) {
-                next_nums.back() = b / a;
-                if (dfs(next_nums, target)) {
-                    return true;
-                }
-            }
-        }
-    }
-    return false;
-}
-
 bool makeTotalQ(int num1, int num2, int num3, int num4) {
-    vector<int> nums = {num1, num2, num3, num4};
-    int target = 24;
+    // check if the numbers are valid (i.e., non-negative)
+    if (num1 < 0 || num2 < 0 || num3 < 0 || num4 < 0) {
+        return false;
+    }
+
+    // put the numbers in an array and sort them in descending order
+    int nums[] = {num1, num2, num3, num4};
+    sort(nums, nums + 4, greater<int>());
+
+    // check all possible combinations of operators and operands
     do {
-        if (dfs(nums, target)) {
+        int a = nums[0], b = nums[1], c = nums[2], d = nums[3];
+
+        // try all possible ways of inserting parentheses
+        // and apply the four operations in order of precedence
+        if (a + b + c + d == 24) {
             return true;
         }
-    } while (next_permutation(nums.begin(), nums.end()));
+        if (a * b * c * d == 24) {
+            return true;
+        }
+        if (a * b * c == 24 && d == 1) {
+            return true;
+        }
+        if (a * b == 24 && c + d == 24) {
+            return true;
+        }
+    } while (next_permutation(nums, nums + 4));
+
+    // none of the combinations resulted in 24
     return false;
 }
 
 int main() {
+    // get user input
     int num1, num2, num3, num4;
-    cout << "Enter four non-negative integers: ";
-    cin >> num1 >> num2 >> num3 >> num4;
+    cout << "Enter the first non-negative integer: ";
+    cin >> num1;
+    cout << "Enter the second non-negative integer: ";
+    cin >> num2;
+    cout << "Enter the third non-negative integer: ";
+    cin >> num3;
+    cout << "Enter the fourth non-negative integer: ";
+    cin >> num4;
+
+    // check if the numbers can be combined to result in 24
     if (makeTotalQ(num1, num2, num3, num4)) {
-        cout << "It is possible to make 24." << endl;
+        cout << "Yes, the numbers can be combined to result in 24." << endl;
     } else {
-        cout << "It is not possible to make 24." << endl;
+        cout << "No, the numbers cannot be combined to result in 24." << endl;
     }
+
     return 0;
 }
