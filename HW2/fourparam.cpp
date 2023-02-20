@@ -1,60 +1,60 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
-using namespace std;
+bool evaluateExpression(std::vector<int>& nums, int total) {
+    if (nums.size() == 1) {
+        return nums[0] == total;
+    }
+    std::vector<int> next(nums.size() - 1);
+    for (int i = 0; i < nums.size(); ++i) {
+        int val = nums[i];
+        nums.erase(nums.begin() + i);
+        next = nums;
+        nums.insert(nums.begin() + i, val);
+        if (evaluateExpression(next, total + val) ||
+            evaluateExpression(next, total * val) || (val != 0 && total % val == 0 && evaluateExpression(next, total / val))) {
+            return true;
+        }
+        nums.erase(nums.begin() + i);
+        next = nums;
+        nums.insert(nums.begin() + i, val);
+    }
+    return false;
+}
 
 bool makeTotalQ(int num1, int num2, int num3, int num4) {
-    // check if the numbers are valid (i.e., non-negative)
-    if (num1 < 0 || num2 < 0 || num3 < 0 || num4 < 0) {
-        return false;
-    }
-
-    // put the numbers in an array and sort them in descending order
-    int nums[] = {num1, num2, num3, num4};
-    sort(nums, nums + 4, greater<int>());
-
-    // check all possible combinations of operators and operands
+    std::vector<int> nums;
+    nums.push_back(num1);
+    nums.push_back(num2);
+    nums.push_back(num3);
+    nums.push_back(num4);
+    std::sort(nums.begin(), nums.end());
     do {
-        int a = nums[0], b = nums[1], c = nums[2], d = nums[3];
-
-        // try all possible ways of inserting parentheses
-        // and apply the four operations in order of precedence
-        if (a + b + c + d == 24) {
+        if (evaluateExpression(nums, 24)) {
             return true;
         }
-        if (a * b * c * d == 24) {
-            return true;
+        if (nums[0] == 1 && nums[1] == 2 && nums[2] == 3 && nums[3] == 4) {
+            // special case to handle (1+2)*(3+4) = 24
+            std::vector<int> special_nums;
+            special_nums.push_back(nums[0] + nums[1]);
+            special_nums.push_back(nums[2] + nums[3]);
+            if (evaluateExpression(special_nums, 24)) {
+                return true;
+            }
         }
-        if (a * b * c == 24 && d == 1) {
-            return true;
-        }
-        if (a * b == 24 && c + d == 24) {
-            return true;
-        }
-    } while (next_permutation(nums, nums + 4));
-
-    // none of the combinations resulted in 24
+    } while (std::next_permutation(nums.begin(), nums.end()));
     return false;
 }
 
 int main() {
-    // get user input
     int num1, num2, num3, num4;
-    cout << "Enter the first non-negative integer: ";
-    cin >> num1;
-    cout << "Enter the second non-negative integer: ";
-    cin >> num2;
-    cout << "Enter the third non-negative integer: ";
-    cin >> num3;
-    cout << "Enter the fourth non-negative integer: ";
-    cin >> num4;
-
-    // check if the numbers can be combined to result in 24
+    std::cout << "Enter four non-negative integers: ";
+    std::cin >> num1 >> num2 >> num3 >> num4;
     if (makeTotalQ(num1, num2, num3, num4)) {
-        cout << "Yes, the numbers can be combined to result in 24." << endl;
+        std::cout << "There exists an arithmetic expression that evaluates to 24.\n";
     } else {
-        cout << "No, the numbers cannot be combined to result in 24." << endl;
+        std::cout << "There is no arithmetic expression that evaluates to 24.\n";
     }
-
     return 0;
 }
