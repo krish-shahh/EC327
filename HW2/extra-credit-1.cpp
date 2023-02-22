@@ -25,8 +25,14 @@ bool is_prime(long n) {
     if (n < 2) {
         return false;
     }
-    for (long i = 2; i <= sqrt(n); i++) {
-        if (n % i == 0) {
+    if (n == 2 || n == 3) {
+        return true;
+    }
+    if (n % 2 == 0 || n % 3 == 0) {
+        return false;
+    }
+    for (long i = 5; i*i <= n; i += 6) {
+        if (n % i == 0 || n % (i + 2) == 0) {
             return false;
         }
     }
@@ -37,44 +43,32 @@ long next_prime(long n) {
     if (n < 2) {
         return 2;
     }
-    n++; // check the next integer
-    while (!is_prime(n)) {
-        n++; // keep checking until a prime is found
+    if (n == 2) {
+        return 3;
     }
-    return n;
+    long i = n + 2;
+    while (!is_prime(i)) {
+        i += 2;
+    }
+    return i;
 }
 
 int main() {
     long max_long = numeric_limits<long>::max();
     long sum = 1; // start with tau(1) = 1
     long i = 2;
+    long max_x = 1;
+    cout << "x\tS(x)" << endl;
     while (true) {
         long tau_i = tau(i);
         if (sum + tau_i > max_long) {
             break;
         }
         sum += tau_i;
+        max_x = i; // update the largest x value
+        cout << i << "\t" << sum << endl;
         i = next_prime(i);
     }
-    long upper_bound = i; // i is the largest prime power whose tau sum is less than max_long
-    
-    // perform binary search to find the largest n whose tau sum is less than max_long
-    long lo = 1;
-    long hi = upper_bound;
-    long mid;
-    while (lo < hi) {
-        mid = (lo + hi + 1) / 2;
-        long tau_sum = 0;
-        for (long j = 1; j <= mid; j++) {
-            tau_sum += tau(j);
-        }
-        if (tau_sum > max_long) {
-            hi = mid - 1;
-        } else {
-            lo = mid;
-        }
-    }
-    long max_x = lo;
     cout << "The largest value of x is: " << max_x << endl;
     return 0;
 }

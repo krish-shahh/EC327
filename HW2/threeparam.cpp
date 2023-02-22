@@ -19,17 +19,8 @@ bool makeTotalQ(int num1, int num2, int num3) {
 }
 
 int main() {
-    int num1, num2, num3;
-    cout << "Enter first non-negative integer: ";
-    cin >> num1;
-    cout << "Enter second non-negative integer: ";
-    cin >> num2;
-    cout << "Enter third non-negative integer: ";
-    cin >> num3;
-    if (makeTotalQ(num1, num2, num3)) {
-        cout << "It is possible to make 24." << endl;
-    } else {
-        cout << "It is not possible to make 24." << endl;
+    if (makeTotalQ(1,2,8) != true) {
+        cout << "Something is wrong!" << endl;
     }
     return 0;
 }
