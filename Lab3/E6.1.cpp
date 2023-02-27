@@ -18,9 +18,12 @@ int main() {
 
   // Initialize an array with ten random integers
   int arr[10];
+  cout << "Array: " << endl;
   for (int i = 0; i < 10; i++) {
     arr[i] = rand() % 100;
+    cout << arr[i] << " ";
   }
+  cout << endl;
 
   // Print every element at an even index
   cout << "Every element at an even index:" << endl;
