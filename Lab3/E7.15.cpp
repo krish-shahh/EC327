@@ -35,9 +35,9 @@ int* read_data(int& size) {
 
 int main() {
     int size;
+    cout << "Input values (type Q to quit):" << endl;
     int* data = read_data(size);
 
-    cout << "Input values:" << endl;
     for (int i = 0; i < size; ++i) {
         cout << data[i] << " ";
     }
