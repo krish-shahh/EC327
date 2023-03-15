@@ -3,6 +3,7 @@
 #include <ctime>
 #include <map>
 #include <vector>
+#include <cstring>
 
 using namespace std;
 
