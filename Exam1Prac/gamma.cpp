@@ -43,9 +43,13 @@ int main() {
     cout << "Gamma(1+" << ID1 / 10 << ") = " << gamma2 << endl;
 
     float ID = 3.14159;
-    float x = equals(ID);                 
+    float x = equals(ID);   
+    float ID4 = 2512;
+    float x1 = equals(ID4);              
 
     cout << "x= " << x << endl;
+    cout << "x1= " << x1 << endl;
 
+    return 0;
 
 }
