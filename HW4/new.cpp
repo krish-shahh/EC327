@@ -74,10 +74,10 @@ GaussianInteger GaussianInteger::operator*(const GaussianInteger &second) const 
 
 // Division operator
 GaussianInteger GaussianInteger::operator/(const GaussianInteger &second) const {
-    int divisor = second.norm();
-    int dividend_real = real * second.real + imag * second.imag;
-    int dividend_imag = imag * second.real - real * second.imag;
-    return GaussianInteger(dividend_real / divisor, dividend_imag / divisor);
+    int commonFactor = second.norm();
+    int newReal = (real*second.real + imag*second.imag) / commonFactor;
+    int newImag = (imag*second.real - real*second.imag) / commonFactor;
+    return GaussianInteger(newReal, newImag);
 }
 
 // Equality operator
