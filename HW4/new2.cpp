@@ -63,9 +63,9 @@ GaussianInteger GaussianInteger::operator*(const GaussianInteger &second) const 
 }
 
 GaussianInteger GaussianInteger::operator/(const GaussianInteger &second) const {
-    int denom = second.norm();
-    int realNum = real * second.real + imag * second.imag;
-    int imagNum = imag * second.real - real * second.imag;
+    double denom = second.norm();
+    double realNum = real * second.real + imag * second.imag;
+    double imagNum = imag * second.real - real * second.imag;
     return GaussianInteger(realNum / denom, imagNum / denom);
 }
 
@@ -77,8 +77,8 @@ bool GaussianInteger::operator==(const GaussianInteger &second) const {
 
 int main() {
     // Construct some GaussianIntegers
-    GaussianInteger z1(3, 2);
-    GaussianInteger z2(-1, 5);
+    GaussianInteger z1(4, 4);
+    GaussianInteger z2(2, 0);
     GaussianInteger z3(z1);
 
     // Test the print method
