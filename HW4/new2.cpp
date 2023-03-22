@@ -100,7 +100,7 @@ int main() {
     cout << "Norm of z1: " << z1.norm() << endl;
 
     // Test the divides method
-    cout << "Does z2 divide z1? " << z2.divides(z1) << endl;
+    cout << "Does z1 divide z2? " << z1.divides(z2) << endl;
 
     // Test the isPrime method
     cout << "Is z1 prime? " << z1.isPrime() << endl;
