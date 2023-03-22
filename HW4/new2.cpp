@@ -12,14 +12,14 @@ GaussianInteger::GaussianInteger(const GaussianInteger &other) :
 GaussianInteger::GaussianInteger(const int realCoeff, const int imagCoeff) :
     real(realCoeff), imag(imagCoeff) {}
 
-    // Returns true if this object is divisible by [second]
-    bool GaussianInteger::divides(const GaussianInteger &second) const {
-        if (second.real == 0 && second.imag == 0) {
-            return false; // division by zero is not defined
-        }
-        return (real * second.real + imag * second.imag) % second.norm() == 0 &&
-               (imag * second.real - real * second.imag) % second.norm() == 0;
+// Returns true if this object is divisible by [second]
+bool GaussianInteger::divides(const GaussianInteger &second) const {
+    if (second.real == 0 && second.imag == 0) {
+        return false; // division by zero is not defined
     }
+    return ((real * second.real + imag * second.imag) % second.norm() == 0 &&
+           (imag * second.real - real * second.imag) % second.norm() == 0);
+}
 
 int GaussianInteger::norm() const {
   return real * real + imag * imag;
@@ -37,10 +37,13 @@ string GaussianInteger::print() const {
 
 // Returns true if this GaussianInteger is prime
     bool GaussianInteger::isPrime() const {
+        if (norm() == 1 || norm() == 0) {
+            return false;
+        }
         if (norm() == 2) {
             return true; // special case: 1+i and 1-i are prime
         }
-        if (real == 0 && (abs(imag) % 4 == 3)) {
+        if ((real == 0 || imag == 0) && ((int)sqrt(norm()) % 4 == 3)) {
             return true; // special case: Gaussian integers of the form bi where b is an odd prime are prime
         }
         for (int i = 2; i <= sqrt(norm()); i++) {
@@ -79,12 +82,10 @@ int main() {
     // Construct some GaussianIntegers
     GaussianInteger z1(4, 4);
     GaussianInteger z2(2, 0);
-    GaussianInteger z3(z1);
 
     // Test the print method
     cout << "z1 = " << z1.print() << endl;
     cout << "z2 = " << z2.print() << endl;
-    cout << "z3 = " << z3.print() << endl;
 
     // Test the addition operator
     cout << "z1 + z2 = " << (z1 + z2).print() << endl;
