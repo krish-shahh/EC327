@@ -1,3 +1,6 @@
+/*Write a function that returns a pointer to the maximum value of an array of floating­ point data:
+double* maximum(double* a, int size) If size is 0, return nullptr.*/
+
 #include <iostream>
 
 using namespace std;

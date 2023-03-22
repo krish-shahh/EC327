@@ -1,3 +1,6 @@
+/*Write a function int* read_data(int& size) that reads data from cin until the user ter­ minates input by entering Q. The function should set the size reference parameter to the number of numeric inputs. Return a pointer to an array on the free store. That array should have exactly size elements. Of course, you won’t know at the out­
+set how many elements the user will enter. Start with an array of 10 elements, and double the size whenever the array fills up. At the end, allocate an array of the cor­ rect size and copy all inputs into it. Be sure to delete any intermediate arrays.*/
+
 #include <iostream>
 
 using namespace std;

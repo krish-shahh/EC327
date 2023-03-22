@@ -1,3 +1,6 @@
+/*Write a function that, given strings s, t, and u, returns a string (allocated with the new operator) in which all occurrences of t in s are replaced with u:
+char* replace_all(const char s[], const char t[], const char u[])*/
+
 #include <iostream>
 
 using namespace std;
