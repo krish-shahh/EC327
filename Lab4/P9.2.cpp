@@ -1,45 +1,32 @@
 #include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
+#include "P9.2.h"
 
 using namespace std;
 
-class Person {
-public:
-    // Constructor with given name and no friends
-    Person(const string& name) : name_(name) {}
+int main() {
+    // create three people
+    Person alice("Alice");
+    Person bob("Bob");
+    Person charlie("Charlie");
 
-    // Adds p as a friend of this person
-    void befriend(const Person& p) {
-        if (!is_friend(p)) {
-            friends_.push_back(p.name_);
-        }
-    }
+    // befriend some people
+    alice.befriend(bob);
+    bob.befriend(charlie);
+    charlie.befriend(alice);
 
-    // Removes p as a friend of this person
-    void unfriend(const Person& p) {
-        auto it = find(friends_.begin(), friends_.end(), p.name_);
-        if (it != friends_.end()) {
-            friends_.erase(it);
-        }
-    }
+    // print out each person's friends
+    cout << alice.get_friend_names() << endl;
+    cout << bob.get_friend_names() << endl;
+    cout << charlie.get_friend_names() << endl;
 
-    // Returns a string with the names of all friends separated by spaces
-    string get_friend_names() const {
-        string result;
-        for (const auto& friend_name : friends_) {
-            result += friend_name + " ";
-        }
-        return result;
-    }
+    // unfriend some people
+    alice.unfriend(bob);
+    charlie.unfriend(alice);
 
-private:
-    string name_;
-    vector<string> friends_;
+    // print out each person's updated friends
+    cout << alice.get_friend_names() << endl;
+    cout << bob.get_friend_names() << endl;
+    cout << charlie.get_friend_names() << endl;
 
-    // Returns true if p is already a friend of this person
-    bool is_friend(const Person& p) const {
-        return find(friends_.begin(), friends_.end(), p.name_) != friends_.end();
-    }
-};
+    return 0;
+}

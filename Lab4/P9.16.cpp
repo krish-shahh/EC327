@@ -1,29 +1,19 @@
 #include <iostream>
-#include <string>
-#include <vector>
+#include "P9.16.h"  // assuming Letter class is defined in Letter.h
 
 using namespace std;
 
-class Letter {
-public:
-    Letter(string from, string to) : from_{from}, to_{to} {}
-    
-    void add_line(string line) {
-        body_.push_back(line);
-    }
-    
-    string get_text() {
-        string text = "Dear " + to_ + ":\n\n";
-        for (const auto& line : body_) {
-            text += line + "\n";
-        }
-        text += "\nSincerely,\n\n" + from_;
-        return text;
-    }
-    
-private:
-    string from_;
-    string to_;
-    vector<string> body_;
-};
+int main() {
+    // create a letter from "John" to "Mary"
+    Letter letter("John", "Mary");
 
+    // add some lines to the letter
+    letter.add_line("How are you doing?");
+    letter.add_line("I hope this letter finds you well.");
+    letter.add_line("I wanted to let you know that I'm thinking of you.");
+
+    // print the text of the letter
+    cout << letter.get_text() << endl;
+
+    return 0;
+}
