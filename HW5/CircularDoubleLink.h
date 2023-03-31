@@ -1,34 +1,56 @@
+#include <iostream>
+#include "DoubleLink.h"
+
 class CircularDoubleLink : public DoubleLink {
 public:
-    CircularDoubleLink(int value, CircularDoubleLink* prev = nullptr, CircularDoubleLink* next = nullptr)
-        : DoubleLink(value, prev, next), lastLink(nullptr) {
-        if (next == nullptr && prev == nullptr) {
-            setNext(this);
-            setPrev(this);
+    CircularDoubleLink(int thePayload=0) : DoubleLink(thePayload) {
+        next = this;
+        prev = this;
+    }
+
+    CircularDoubleLink(const int * const data, unsigned int size) : DoubleLink(data, size) {
+        DoubleLink *first = &(this->getFirst());
+        DoubleLink *last = &(this->getLast());
+        first->setPrev(last);
+        last->setNext(first);
+    }
+
+    DoubleLink *getPrev() const {
+        if (prev == this) {
+            return getLast().prev;
+        } else {
+            return prev;
         }
     }
 
-    // override setNext and setPrev to update lastLink
-    void setNext(CircularDoubleLink* link) {
-        DoubleLink::setNext(link);
-        link->lastLink = lastLink;
+    void setPrev(DoubleLink *item) {
+        if (this == getNext() && item != getLast().prev) {
+            last()->setNext(item);
+            item->setPrev(last());
+        } else {
+            prev = item;
+        }
     }
 
-    void setPrev(CircularDoubleLink* link) {
-        DoubleLink::setPrev(link);
-        link->lastLink = lastLink;
+    CircularDoubleLink& last() {
+        return static_cast<CircularDoubleLink&>(DoubleLink::getLast());
     }
 
-    // override getLast to return the last link, which is the link before the first link
-    CircularDoubleLink& getLast() {
-        return *lastLink;
-    }
-
-    // override getFirst to return this link, since it's the first link
-    CircularDoubleLink& getFirst() {
+    CircularDoubleLink& operator+=(CircularDoubleLink &otherLink) {
+        this->last().next = &otherLink;
+        otherLink.setPrev(&(this->last()));
+        otherLink.setNext(this);
+        this->setPrev(&otherLink);
         return *this;
     }
 
-private:
-    CircularDoubleLink* lastLink;
+    friend ostream & operator<< (ostream &out, const CircularDoubleLink &startLink) {
+        const CircularDoubleLink* curr = &startLink;
+        do {
+            out << curr->getPayload() << "->";
+            curr = static_cast<const CircularDoubleLink*>(curr->getNext());
+        } while (curr != &startLink);
+        out << "";
+        return out;
+    }
 };

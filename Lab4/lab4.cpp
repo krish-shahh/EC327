@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <vector>
 #include "E9.8.h"
 #include "P9.2.h"
 #include "P9.4.h"
@@ -15,6 +16,8 @@ void p94();
 void p916();
 
 void p88(const string& filename) {
+
+    const string filename = "foo";
 
     ifstream input_file(filename);
 
@@ -138,6 +141,8 @@ void p916() {
 }
 
 int main() {
+
+
     p88("foo");
     e98();
     p92();

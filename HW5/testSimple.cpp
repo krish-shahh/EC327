@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
   // Create a linked list from an array
-  const int data[] = {3, 1, 4, 1, 5, 9, 2, 6};
+  const int data[] = {7, 5, 8, 0, 2, 5, 1, 2};
   unsigned int size = sizeof(data) / sizeof(data[0]);
   SimpleLink list(data, size);
   

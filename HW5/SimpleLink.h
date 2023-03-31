@@ -13,6 +13,7 @@ class SimpleLink {
  
   int getPayload() const { return payload; }
   SimpleLink *getNext() const { return next; }
+
   void setPayload(int newPayload) { payload = newPayload; }
   void setNext(SimpleLink *item) { next = item; }
   
@@ -46,11 +47,11 @@ class SimpleLink {
       out << curr->getPayload() << "->";
       curr = curr->getNext();
     }
-    out << "nullptr";
+    out << "";
     return out;
   }
  
- private:
+ protected:
   int payload;
   SimpleLink *next;
 };
