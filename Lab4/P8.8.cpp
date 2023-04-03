@@ -4,7 +4,12 @@
 
 using namespace std;
 
-int main(char* argv[]) {
+int main(int argc, char* argv[]) {
+
+    if (argc < 2) {
+        cout << "Usage: " << argv[0] << " input_file" << endl;
+        return 1;
+    }
 
     ifstream input_file(argv[1]);
 
@@ -39,12 +44,12 @@ int main(char* argv[]) {
 
     int total_sequences = 0;
     for (auto iter = frequency_table.begin(); iter != frequency_table.end(); iter++) {
-        cout << iter->first << "\t" << iter->second << endl;
+        cout << iter->first << "\t\t" << iter->second << endl;
         total_sequences += iter->second;
     }
 
     cout << "-----------------------------------" << endl;
-    cout << "Total\t" << total_sequences << endl;
+    cout << "Total = " << total_sequences << endl;
 
     return 0;
 }
