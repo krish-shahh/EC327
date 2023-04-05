@@ -143,6 +143,7 @@ void p101() {
 }
 
 void p102() {
+    int a,b;
     cout << "Question P10.2: " << endl;
     Clock c;
     cout << "Current (NY) time: " << c.get_time() << endl;
@@ -150,7 +151,12 @@ void p102() {
     WorldClock wc(-3); // California is 3 hours behind NY
     cout << "California time: " << wc.get_time() << endl;
 
-    c.set_alarm(3, 42);
+    cout << "Set Alarm (hour): " << endl;
+    cin >> a;
+    cout << "Set Alarm (minutes): " << endl;
+    cin >> b;
+
+    c.set_alarm(a, b);
 
     for (int i = 0; i < 10; i++) {
         cout << "Current (NY) time: " << c.get_time() << endl;
